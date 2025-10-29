@@ -1,6 +1,7 @@
 import type { User } from "../entities/user";
 
-const url = 'http://localhost:3000/api/users';
+const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const url = `${baseUrl}/api/users`;
 
 export async function register(user: User) {
   const response = await fetch(`${url}/register`, {

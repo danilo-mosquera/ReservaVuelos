@@ -1,6 +1,7 @@
 import type { Flight } from "../entities/flight";
 
-const url = 'http://localhost:3000/api/flights';
+const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const url = `${baseUrl}/api/flights`;
 
 export async function getFlights() {
   const res = await fetch(url);
