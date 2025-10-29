@@ -1,0 +1,172 @@
+<body>
+
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .flight-info {
+      background: #eef3ff;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .seats {
+      display: grid;
+      grid-template-columns: repeat(6, 50px);
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .seat {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      background: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .seat.selected { background: #28a745; color: white; }
+    .seat.occupied { background: #dc3545; color: white; cursor: not-allowed; }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .payment {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #f0f5ff;
+      border-radius: 10px;
+    }
+
+    .payment h3 {
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .btn {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    .error {
+      color: #dc3545;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+  </style>
+
+  <header>
+    <h1>Reserva de Asientos</h1>
+  </header>
+
+  <div class="container">
+    <div class="flight-info">
+      <h2>Vuelo GY123 - Guayaquil → Quito</h2>
+      <p><strong>Fecha:</strong> 15 de noviembre, 2025</p>
+      <p><strong>Hora:</strong> 08:30</p>
+      <p><strong>Aeronave:</strong> Airbus A320</p>
+    </div>
+
+    <h3 style="text-align:center">Selecciona tus asientos</h3>
+
+    <div id="seats-container" class="seats"></div>
+
+    <div class="legend">
+      <span><div class="seat"></div> Disponible</span>
+      <span><div class="seat selected"></div> Seleccionado</span>
+      <span><div class="seat occupied"></div> Ocupado</span>
+    </div>
+
+    <div class="payment">
+        <h3>Pago con Tarjeta</h3>
+        <div class="form-group">
+            <label for="cardNumber">Número de Tarjeta</label>
+            <input type="text" id="cardNumber" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
+        </div>
+        <div class="form-group">
+            <label for="cardHolder">Titular de la Tarjeta</label>
+            <input type="text" id="cardHolder" placeholder="Nombre como aparece en la tarjeta" required>
+        </div>
+        <div class="form-group">
+            <label for="expiry">Fecha de Expiración</label>
+            <input type="text" id="expiry" maxlength="5" placeholder="MM/AA" required>
+        </div>
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="password" id="cvv" maxlength="4" placeholder="***" required>
+        </div>
+        <p id="payment-error" class="error"></p>
+    </div>
+
+    <button id="confirm-btn" class="btn">Confirmar Reserva</button>
+</div>

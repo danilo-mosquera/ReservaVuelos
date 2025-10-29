@@ -1,0 +1,111 @@
+<body>
+  <style>
+    :root{--accent:#0b76ef;--muted:#666}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:#f6f8fb; color:#111}
+    .container{max-width:1100px;margin:28px auto;padding:20px}
+    .card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(20,20,40,0.06)}
+    .filters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+    .filters .field{display:flex;flex-direction:column}
+    label{font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type=date], input[type=time], select, input[type=number]{padding:8px 10px;border:1px solid #e3e7ee;border-radius:8px}
+    .controls{display:flex;gap:10px;align-items:center}
+    .controls button{padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+    .controls button.ghost{background:transparent;color:var(--accent);border:1px solid #d7e7ff}
+    .results{margin-top:12px}
+    .flight{display:grid;grid-template-columns:120px 1fr 140px;gap:12px;align-items:center;padding:12px;border-bottom:1px dashed #eef2f7}
+    .flight:last-child{border-bottom:0}
+    .time{font-weight:600;font-size:16px}
+    .airport{color:var(--muted);font-size:13px}
+    .meta{font-size:14px;color:#222}
+    .price{font-weight:700;font-size:18px;color:#0b8040}
+    .pill{display:inline-block;padding:6px 8px;border-radius:999px;background:#eef7ff;color:var(--accent);font-size:12px}
+    .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    @media (max-width:900px){.filters{grid-template-columns:repeat(2,1fr);} .flight{grid-template-columns:1fr}}
+    @media (max-width:520px){.filters{grid-template-columns:1fr} header{flex-direction:column;align-items:flex-start;gap:10px}}
+  </style>
+
+  <div class="container">
+    <header style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h1 style="font-size:22px;margin:0">Listado de vuelos</h1>
+    </header>
+
+    <section class="card">
+      <div class="top-row">
+        <div style="font-weight:600">Filtros</div>
+        <div class="controls">
+          <button id="resetBtn" class="ghost">Restablecer</button>
+          <button id="applyBtn">Aplicar</button>
+        </div>
+      </div>
+
+      <div class="filters" role="region" aria-label="Filtros de búsqueda">
+        <div class="field">
+          <label for="date">Fecha</label>
+          <input type="date" id="date">
+        </div>
+
+        <div class="field">
+          <label for="timeFrom">Horario (desde - hasta)</label>
+          <div style="display:flex;gap:6px">
+            <input type="time" id="timeFrom">
+            <input type="time" id="timeTo">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="seatCategory">Categoría de asiento</label>
+          <select id="seatCategory">
+            <option value="">(Cualquiera)</option>
+            <option>Economy</option>
+            <option>Premium Economy</option>
+            <option>Business</option>
+            <option>First</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="airline">Aerolínea</label>
+          <select id="airline">
+            <option value="">(Todas)</option>
+          </select>
+        </div>
+        
+        <div class="field">
+          <label for="search">Buscar (aeropuerto, código, avión)</label>
+          <input id="search" placeholder="p. ej. GYE, JFK, A320">
+        </div>
+
+        <div class="field">
+          <label for="priceMax">Precio máximo (USD)</label>
+          <input type="number" id="priceMax" min="0" placeholder="Ej: 300">
+        </div>
+
+        <div class="field">
+          <label for="sortBy">Ordenar por</label>
+          <select id="sortBy">
+            <option value="time_asc">Horario ↑</option>
+            <option value="time_desc">Horario ↓</option>
+            <option value="price_asc">Precio ↑</option>
+            <option value="price_desc">Precio ↓</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Resultados por página</label>
+          <select id="perPage">
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="results card" id="resultsArea" style="margin-top:14px;padding:10px">
+        <!-- Aquí se renderizan los vuelos -->
+        <div id="resultsCount" style="margin-bottom:8px;color:var(--muted)"></div>
+        <div id="flights-list"></div>
+        <div id="pagination" style="margin-top:10px;display:flex;gap:8px;align-items:center"></div>
+      </div>
+    </section>
+  </div>
+</body>

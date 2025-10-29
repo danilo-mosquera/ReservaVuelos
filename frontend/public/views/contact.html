@@ -1,0 +1,24 @@
+<style>:root{--accent:#0b76ef;--muted:#666}</style>
+
+<div style="font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:#f6f8fb; color:#111">
+    <div style="max-width:1100px;margin:30px auto;padding:0 20px">
+        <section style="margin-bottom:60px;background:#fff;border-radius:12px;padding:24px;box-shadow:0 6px 18px rgba(20,20,40,0.06)" id="contacto">
+            <h1 style="font-size:26px;margin-top:0">Contáctanos</h1>
+            <p style="line-height:1.6;color:var(--muted)">¿Tienes dudas o sugerencias? Envíanos un mensaje y te responderemos lo antes posible.</p>
+            <form style="display:grid;gap:12px;max-width:480px" id="contactForm">
+                <input style="padding:10px;border:1px solid #ddd;border-radius:8px;font:inherit" type="text" id="name" placeholder="Tu nombre" required>
+                <input style="padding:10px;border:1px solid #ddd;border-radius:8px;font:inherit" type="email" id="email" placeholder="Tu correo electrónico" required>
+                <textarea style="padding:10px;border:1px solid #ddd;border-radius:8px;font:inherit" id="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                <button style="padding:10px 16px;background:var(--accent);color:#fff;border:0;border-radius:8px;cursor:pointer" type="submit">Enviar mensaje</button>
+            </form>
+        </section>
+    </div>
+</div>
+        
+<script>
+    document.getElementById('contactForm').addEventListener('submit', e=>{
+        e.preventDefault();
+        alert('Gracias por tu mensaje. Nos pondremos en contacto pronto.');
+        e.target.reset();
+    });
+</script>
